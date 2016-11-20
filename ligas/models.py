@@ -5,7 +5,7 @@ class Liga(models.Model):
 
     name = models.CharField(max_length=50)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -18,5 +18,5 @@ class Equipo(models.Model):
     capitan = models.CharField(max_length=50, default='Capitan')
     comment = models.CharField(max_length=200, blank=True)
 
-    def __unicode__(self):
-        return self.league
+    def __str__(self):
+        return self.nombre
