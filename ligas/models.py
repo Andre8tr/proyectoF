@@ -4,6 +4,8 @@ class Liga(models.Model):
     """ Categorias para registrar ligas """
 
     name = models.CharField(max_length=50)
+    pais = models.CharField(max_length=50,default='/')
+    numero = models.CharField(max_length=2,default='20')
 
     def __str__(self):
         return self.name

@@ -1,1 +1,13 @@
-{{ equipos }}
+{% extends 'ligas/base.html' %}
+
+   {% block content %}
+{% for post in equipos %}
+   <div class="post">
+     <h2> Datos de equipo </h1>
+       <p>Nombre: {{ post.nombre }}</p>
+       <p>Color Uniforme: {{ post.color }}</p>
+       <p>Capitan: {{ post.capitan }}</p>
+       <p>Comentario: {{ post.comment }}</p>
+   </div>
+{% endfor %}
+ {% endblock content %}

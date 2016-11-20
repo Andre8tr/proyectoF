@@ -1,1 +1,12 @@
-  {{ ligas }}
+{% extends 'ligas/base.html' %}
+{% block content %}
+{% for post in ligas %}
+   <div class="post">
+     <h2> Datos de Liga </h1>
+       <p>Nombre: {{ post.name }}</p>
+       <p>Pais: {{ post.pais }}</p>
+       <p>Numero de equipos: {{ post.numero }}</p>
+  
+   </div>
+{% endfor %}
+{% endblock content %}
