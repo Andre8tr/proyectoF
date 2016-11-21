@@ -3,10 +3,10 @@
 {% for post in ligas %}
    <div class="post">
      <h2> Datos de Liga </h1>
-       <p>Nombre: {{ post.name }}</p>
-       <p>Pais: {{ post.pais }}</p>
-       <p>Numero de equipos: {{ post.numero }}</p>
-  
+         <h1><a href="{% url 'ligas.views.post_detail' pk=post.pk %}">{{ post.name }}</a></h1>
+       <!--<p>Pais: {{ post.pais }}</p>
+       <p>Numero de equipos: {{ post.numero }}</p>-->
+
    </div>
 {% endfor %}
 {% endblock content %}
