@@ -32,3 +32,14 @@ def nuevo_equipo(request):
         else:
             form = EquipoForm()
         return render(request, 'ligas/equipo_edit.html', {'form': form})
+def equipo_edit(request, pk):
+        post = get_object_or_404(Equipo, pk=pk)
+        if request.method == "POST":
+            form = EquipoForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect('ligas.views.post_detailE', pk=post.pk)
+        else:
+            form = EquipoForm(instance=post)
+        return render(request, 'ligas/equipo_edit.html', {'form': form})

@@ -3,7 +3,8 @@
 {% for post in equipos %}
    <div class="post">
      <h2> Equipo: </h1>
-         <h1><a href="{% url 'ligas.views.post_detailE' pk=post.pk %}">{{ post.nombre }}</a></h1>
+       <a class="btn btn-default" href="{% url 'equipo_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+       <h1><a href="{% url 'ligas.views.post_detailE' pk=post.pk %}">{{ post.nombre }}</a></h1>
 
    </div>
 {% endfor %}
