@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from .models import Liga,Equipo
 from django.shortcuts import render, get_object_or_404
-from .forms import EquipoForm
+from .forms import EquipoForm, LigaForm
 from django.shortcuts import redirect
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -11,7 +14,7 @@ def post_ligas(request):
         return render(request, 'ligas/post_ligas.html', {'ligas':ligas})
 
 def post_equipos(request):
-        equipos = Equipo.objects.order_by('nombre')
+        equipos = Equipo.objects.order_by('league')
         return render(request, 'ligas/post_equipos.html', {'equipos':equipos})
 
 def post_detail(request, pk):
@@ -43,3 +46,37 @@ def equipo_edit(request, pk):
         else:
             form = EquipoForm(instance=post)
         return render(request, 'ligas/equipo_edit.html', {'form': form})
+
+def nueva_liga(request):
+        if request.method == "POST":
+            form = LigaForm(request.POST)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect('ligas.views.post_detail', pk=post.pk)
+        else:
+            form = LigaForm()
+        return render(request, 'ligas/liga_edit.html', {'form': form})
+
+def liga_edit(request, pk):
+        post = get_object_or_404(Liga, pk=pk)
+        if request.method == "POST":
+            form = LigaForm(request.POST, instance=post)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect('ligas.views.post_detail', pk=post.pk)
+        else:
+            form = LigaForm(instance=post)
+        return render(request, 'ligas/liga_edit.html', {'form': form})
+
+#____________------------------------Login-----------------------__
+def nuevo_usuario(request):
+    if request.method=='POST':
+        formulario = UserCreationForm(request.POST)
+        if formulario.is_valid:
+            formulario.save()
+            return HttpResponseRedirect('/')
+    else:
+        formulario = UserCreationForm()
+    return render_to_response('ligas/nuevousuario.html',{'formulario':formulario}, context_instance=RequestContext(request))
