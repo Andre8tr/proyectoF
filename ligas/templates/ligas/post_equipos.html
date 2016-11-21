@@ -1,13 +1,10 @@
 {% extends 'ligas/base.html' %}
-
-   {% block content %}
+{% block content %}
 {% for post in equipos %}
    <div class="post">
-     <h2> Datos de equipo </h1>
-       <p>Nombre: {{ post.nombre }}</p>
-       <p>Color Uniforme: {{ post.color }}</p>
-       <p>Capitan: {{ post.capitan }}</p>
-       <p>Comentario: {{ post.comment }}</p>
+     <h2> Equipo: </h1>
+         <h1><a href="{% url 'ligas.views.post_detailE' pk=post.pk %}">{{ post.nombre }}</a></h1>
+
    </div>
 {% endfor %}
- {% endblock content %}
+{% endblock content %}

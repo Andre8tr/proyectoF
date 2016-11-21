@@ -15,9 +15,9 @@ class Equipo(models.Model):
     """ Equipos de la liga """
 
     league = models.ForeignKey(Liga, null=True, blank=True)
-    nombre = models.CharField(max_length=50, default='Equipo')
-    color = models.CharField(max_length=50, default='Color')
-    capitan = models.CharField(max_length=50, default='Capitan')
+    nombre = models.CharField(max_length=50, default=' ')
+    color = models.CharField(max_length=50, default=' ')
+    capitan = models.CharField(max_length=50, default=' ')
     comment = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
