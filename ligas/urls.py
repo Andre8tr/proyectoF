@@ -1,9 +1,12 @@
 from django.conf.urls import include, url
 from . import views
+from django.contrib.auth.views import login,logout
 
 urlpatterns = [
-        #url(r'^usuario/nuevo/$', views.nuevo_usuario, name='nuevo_user'),
-        #url(r'^usuario/nuevo', views.RegistroUsuario, name="registrar"),
+        #Login
+        url(r'^accounts/login/$',  login),
+        url(r'^accounts/logout/$', logout),
+
         url(r'^usuario/nuevo/$', views.RegistroUsuario.as_view(), name='nuevo_user'),
         url(r'^$', views.post_equipos),
         url(r'^post/(?P<pk>[0-9]+)/$', views.post_detailE),

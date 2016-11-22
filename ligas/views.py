@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.core.urlresolvers import reverse_lazy
+from django.contrib import auth
 
 
 # Create your views here.
@@ -90,6 +91,24 @@ def nuevo_usuario(request):
     else:
         formulario = UserCreationForm()
     return render(request, 'ligas/nuevousuario.html', {'formulario': formulario})
+
+def login(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    user = auth.authenticate(username=username, password=password)
+    if user is not None and user.is_active:
+
+        auth.login(request, user)
+
+        return HttpResponseRedirect("/account/loggedin/")
+    else:
+
+        return redirect('ligas.views.login')
+
+def logout(request):
+    auth.logout(request)
+    # Redirect to a success page.
+    return HttpResponseRedirect("/account/loggedout/")
 
 class RegistroUsuario(CreateView):
     model = User
