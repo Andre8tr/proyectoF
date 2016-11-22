@@ -4,8 +4,8 @@
 	<h1>Registra un nuevo usuario</h1>
 {% endblock %}
 {% block contenido %}
-	<form id='formulario' method='post' action=''>{% csrf_token %}
-		<table>{{formulario}}</table>
-		<p><input type='submit' value='Registrar'/></p>
-	</form>
+<form method="POST" class="post-form">{% csrf_token %}
+    {{ formulario.as_p }}
+    <button type="submit" class="save btn btn-default">Ingresar</button>
+</form>
 {% endblock %}

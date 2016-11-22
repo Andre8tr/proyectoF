@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from .models import Liga,Equipo
 from django.shortcuts import render, get_object_or_404
-from .forms import EquipoForm, LigaForm
+from .forms import EquipoForm, LigaForm, RegistroForm
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.views.generic import CreateView
+from django.core.urlresolvers import reverse_lazy
 
 
 # Create your views here.
@@ -70,6 +73,13 @@ def liga_edit(request, pk):
             form = LigaForm(instance=post)
         return render(request, 'ligas/liga_edit.html', {'form': form})
 
+#-----------------------Visas para borrar---------------------------
+def eliminar_equipo(request, pk):
+    post = get_object_or_404(Equipo, pk=pk)
+    post.delete()
+    return render(request, 'ligas/equipo_edit.html', {'form': form})
+
+
 #____________------------------------Login-----------------------__
 def nuevo_usuario(request):
     if request.method=='POST':
@@ -79,4 +89,10 @@ def nuevo_usuario(request):
             return HttpResponseRedirect('/')
     else:
         formulario = UserCreationForm()
-    return render_to_response('ligas/nuevousuario.html',{'formulario':formulario}, context_instance=RequestContext(request))
+    return render(request, 'ligas/nuevousuario.html', {'formulario': formulario})
+
+class RegistroUsuario(CreateView):
+    model = User
+    template_name = "ligas/registrar.html"
+    form_class = RegistroForm
+    success_url = reverse_lazy('post_equipos')
