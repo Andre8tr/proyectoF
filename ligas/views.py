@@ -100,7 +100,8 @@ def login(request):
 
         auth.login(request, user)
 
-        return HttpResponseRedirect("/account/loggedin/")
+        #return redirect('ligas.views.post_equipos')
+        return HttpResponseRedirect("/postt/")
     else:
 
         return redirect('ligas.views.login')

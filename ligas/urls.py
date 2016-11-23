@@ -4,11 +4,11 @@ from django.contrib.auth.views import login,logout
 
 urlpatterns = [
         #Login
-        url(r'^accounts/login/$',  login),
+        url(r'^$',  login),
         url(r'^accounts/logout/$', logout),
 
         url(r'^usuario/nuevo/$', views.RegistroUsuario.as_view(), name='nuevo_user'),
-        url(r'^$', views.post_equipos),
+        url(r'^postt/$', views.post_equipos),
         url(r'^post/(?P<pk>[0-9]+)/$', views.post_detailE),
         url(r'^post/(?P<pk>[0-9]+)/eliminar/$', views.eliminar_equipo),
         url(r'^post/(?P<pk>[0-9]+)/edit/$', views.equipo_edit, name='equipo_edit'),
